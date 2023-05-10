@@ -1,0 +1,51 @@
+.login_container{
+   background-image: url('D:\minip-master\minip-master\frontend\public\rithvik_bg.jpg');
+   height:100vh;
+   width:100vw;
+   position:absolute;
+   top:0px;
+}
+.login_head{
+  padding-top:30px;
+  font-size:65px;
+  color:rgb(220, 211, 211);
+  
+}
+.login_email,.login_password{
+  width:350px;
+  height:40px;
+  border-radius:10px;
+  padding-left:10px;
+}
+.forms{
+  padding-top:50px;
+}
+.gmail{
+  padding-top:35px;
+  font-size:30px;
+  color:white;
+}
+.forgot{
+  padding-top:10px;
+}
+.login_b{
+  margin:10px 0px 10px 0px;
+  width:130px;
+  height:40px;
+  border-radius:10px;
+  color:white;
+  background-color:rgb(15, 7, 233);
+  transition-duration: 0.4s;
+  cursor:pointer;
+  margin-top: 20px;
+}
+.login_b:hover{
+  background-color:rgb(50, 210, 50);
+}
+.CNA{
+  color:white;
+  padding-right:3px;
+}
+.select{
+  margin-top: 3px;
+}
