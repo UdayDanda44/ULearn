@@ -9,7 +9,7 @@ export const login = (data,navigate) => async (dispatch) => {
                 "Content-Type": "application/json",
              }
     }
-    axios.post('http://localhost:5000/api/auth/login',data,config).then((data1)=>{
+    await axios.post('http://localhost:5000/api/auth/login',data,config).then((data1)=>{
       dispatch({
         type: "LOGIN_USER",
         payload: data1.data,

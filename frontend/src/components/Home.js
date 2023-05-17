@@ -21,7 +21,7 @@ const Home = () => {
     
   }
   const suc=currentUser?.success?true:false
-  
+  console.log(user,"user");
   useEffect(()=>{
     if(suc){
       getuser();

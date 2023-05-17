@@ -19,7 +19,7 @@ const Login = () => {
   }
   return (
     <>
-    <center>
+    <center> 
         <div className="login_container">
             <h3 className="login_head">LOGIN</h3>
         

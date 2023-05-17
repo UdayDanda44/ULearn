@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import "../App.css"
 
 const Register = () => {
-    const [credentials,setCredentials] = useState({username:"",email:"",password:"",role:""});
+    const [credentials,setCredentials] = useState({username:"",email:"",password:"",role:"student"});
     let navigate = useNavigate();
     const onSubmit = async(e)=>{  
         console.log(credentials); 
@@ -53,10 +53,10 @@ const Register = () => {
                 <input name = 'password' type="password" className="form-control" id="exampleInputPassword1" value={credentials.password} onChange = {onChange}/>
             </div>
             <p>Select your role</p>
-            <select className="form-select my-3 select" aria-label="Default select example" name="role" onChange = {onChange}>
-              
-              <option value="teacher">Teacher</option>
+            <select className="form-select my-3 select" aria-label="Default select example" name="role" onChange = {onChange} >
               <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+              
             </select>
             <button type="submit" className="btn btn-primary my-3">Submit</button>
         </form>

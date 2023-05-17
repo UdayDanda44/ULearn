@@ -4,7 +4,7 @@ const url = "mongodb://127.0.0.1";
 
 const connectToMongo = async()=>{
     await mongoose.connect(url);
-    console.log("connected")
+    console.log("connected to",url)
  
 }
 
