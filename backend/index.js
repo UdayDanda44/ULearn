@@ -1,6 +1,7 @@
 const connectToMongo = require('./db');
 const user=require('./routes/auth')
 const video=require('./routes/video')
+const comments = require('./routes/comments')
 connectToMongo();
 
 var express = require('express');
@@ -15,6 +16,8 @@ app.use(express.json())
 app.use('/api/auth',user)
 
 app.use('/api/auth',video)
+
+app.use('/api/auth',comments)
 
 const port = 5000; 
 

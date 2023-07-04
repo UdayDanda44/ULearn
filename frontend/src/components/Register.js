@@ -22,7 +22,7 @@ const Register = () => {
       console.log(json)
       if(json.success){
         localStorage.setItem('token',json.authtoken)
-        navigate("/");
+        navigate("/login");
       }
       else{
         alert("please enter correct credentials")
@@ -34,31 +34,33 @@ const Register = () => {
         setCredentials({...credentials,[e.target.name]:e.target.value})
       }
     
-  return (
+  return ( 
     <>
        
-        <form className = 'container my-5' onSubmit={onSubmit}>
-        <h1>Create new Account</h1>
+      <form className = 'bg-sky-300 flex flex-col items-end justify-center h-[100vh] bg-sign_up bg-no-repeat' onSubmit={onSubmit}>
+        <div className='bg-slate-100 flex flex-col items-center justify-center border-2 p-10 rounded-2xl shadow-xl mx-10'>
+        <h1 className='my-3 text-2xl'>Create new Account</h1>
             <div className="mb-3">
-                <label htmlFor="name" className="form-label my-2">Username</label>
-                <input name = 'username' type = 'text' className="form-control" id="username" value={credentials.username} onChange = {onChange}/>
+                <label htmlFor="name" className="my-7">Username</label><br/>
+                <input name = 'username' type = 'text' className="border-2 hover:rounded-xl my-2 w-80 h-9 p-1 transition" id="username" value={credentials.username} onChange = {onChange}/>
             </div>
             <div className="mb-3">
 
-                <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                <input name = 'email' type="email" className="form-control" id="exampleInputEmail1" value={credentials.email} aria-describedby="emailHelp" onChange = {onChange}/>
+                <label htmlFor="exampleInputEmail1" className="my-2">Email address</label><br/>
+                <input name = 'email' type="email" className="border-2 hover:rounded-xl my-2 w-80 h-9 p-1 transition" id="exampleInputEmail1" value={credentials.email} aria-describedby="emailHelp" onChange = {onChange}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                <input name = 'password' type="password" className="form-control" id="exampleInputPassword1" value={credentials.password} onChange = {onChange}/>
+                <label htmlFor="exampleInputPassword1" className="my-2">Password</label><br/>
+                <input name = 'password' type="password" className="border-2 hover:rounded-xl my-2 w-80 h-9 p-1 transition" id="exampleInputPassword1" value={credentials.password} onChange = {onChange}/>
             </div>
             <p>Select your role</p>
-            <select className="form-select my-3 select" aria-label="Default select example" name="role" onChange = {onChange} >
+            <select className="border-2 rounded my-1" aria-label="Default select example" name="role" onChange = {onChange} >
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
               
-            </select>
-            <button type="submit" className="btn btn-primary my-3">Submit</button>
+            </select><br/>
+            <button type="submit" className="my-3 text-slate-50 bg-blue-700 rounded py-1 px-3 hover:shadow-lg hover:shadow-black">Submit</button>
+            </div>
         </form>
     </>
   )

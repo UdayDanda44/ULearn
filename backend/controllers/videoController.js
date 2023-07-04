@@ -5,9 +5,15 @@ exports.uploadVideo = async(req,res)=>{
     const video = await Video.create({title,description,url,teacher})
     await video.save();
     return res.status(200).json({success:true,video});
-}
+}  
 
 exports.getVideo = async(req,res)=>{
-    const videos = await Video.find();
-    return res.status(200).json({success:true,videos});
+    try {
+        const videos = await Video.find();
+        return res.status(200).json({success:true,videos});
+    } catch (error) {
+        return res.status(200).json({success:false,error});
+    }
+    
 }
+

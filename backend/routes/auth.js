@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const JWT_SECRET = "Harryisafreak$@"
 var jwt = require('jsonwebtoken')
 const fetchUser = require('../middleware/fetchUser')
-
+const Video = require("../models/Video");
 
 router.post(
   "/createuser",
@@ -92,7 +92,7 @@ router.post(
         }
         const authtoken = jwt.sign(data, JWT_SECRET)
         success = true;
-        res.json({success,authtoken});
+        res.json({success,authtoken,user});
       } catch (err) {
         console.log(err);
         res.status(500).json("internal server error")
@@ -103,11 +103,13 @@ router.post(
     try {
         const userId = req.user.id;
         const user = await User.findById(userId);
-        res.send(user)
+        return res.send(user)
     } catch (err) {
         console.log(err);
-        res.status(500).json("internal server error")
+        return res.status(500).json("internal server error")
     }
   })
+  
+
 
 module.exports = router;

@@ -5,6 +5,7 @@ import Register from './Register'
 import Student from './Student'
 import Teacher from './Teacher'
 import {useSelector} from 'react-redux'
+import Mainpage from './Mainpage'
 
 const Home = () => {
   const [user, setuser] = useState()
@@ -21,7 +22,6 @@ const Home = () => {
     
   }
   const suc=currentUser?.success?true:false
-  console.log(user,"user");
   useEffect(()=>{
     if(suc){
       getuser();
@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <div>
       <Navbar/>
-      {user ? user?.role==="student"?<Student/>:<Teacher/> : <Register/>}
+      {user ? user?.role==="student"?<Student/>:<Teacher/> : <Mainpage/>}
     </div>
   ) 
 }

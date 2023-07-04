@@ -17,6 +17,15 @@ const Video = new Schema({
   teacher:{
     type:String,
     required:true
+  },
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ], 
+  likesCount:{
+    type:Number
   }
 });
 
