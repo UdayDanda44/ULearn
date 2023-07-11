@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideo } from "../actions/videoactions";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Student = () => { 
   const dispatch = useDispatch();
@@ -43,19 +44,18 @@ const Student = () => {
       user_id: currentUser.user._id,
     });
 
-    // if (response.status === 200) {
-    //   // Update the local likes count
-    //   setLikes((prevLikes) => ({
-    //     ...prevLikes,
-    //     [videoId]: prevLikes[videoId] + 1,
-    //   }));
-    // }
+    if (response.status === 200) {
+      dispatch(getVideo())
+    }
   };
 
   const handleUnlike = async (videoId) => {
     const response = await axios.post(`http://localhost:5000/api/auth/unlikevideo/${videoId}`, {
       user_id: currentUser.user._id,
     });
+    if (response.status === 200) {
+      dispatch(getVideo())
+    }
     // if (response.status === 200) {
     //   // Update the local likes count
     //   setLikes((prevLikes) => ({
@@ -92,9 +92,10 @@ const Student = () => {
     const filteredComments = commentdata.filter((comment) => comment.video_id === video._id);
     const urlid = video.url;
     var uid = urlid.split("/d/")[1].split("/")[0];
-
     return (
+      
       <div className="flex justify-center flex-row" key={video.url}>
+        
         <div className="my-5 border-2 p-4 rounded hover:rounded-xl">
           <iframe width="640" height="360" src={`https://drive.google.com/uc?export=view&id=${uid}`} allowFullScreen></iframe>
           <div className="card-body">
@@ -140,7 +141,7 @@ const Student = () => {
     );
   });
 
-  return <div className="grid grid-cols-2">{videoElements}</div>;
+  return <><Link to = '/likedvideos'>LikedVideos</Link><div className="grid grid-cols-2">{videoElements}</div></>;
 };
 
 export default Student;

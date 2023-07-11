@@ -25,7 +25,8 @@ const Video = new Schema({
     },
   ], 
   likesCount:{
-    type:Number
+    type:Number,
+    default:0
   }
 });
 
