@@ -18,13 +18,12 @@ export const login = (data,navigate) => async (dispatch) => {
       if (!data1.success) {
         localStorage.setItem("token", data1.data.authtoken);
         navigate("/");
-      } else {
-        alert("please enter correct credentials");
       }
     })
 
   } catch (err) {
     console.log(err);
+    alert("please enter correct credentials");
   }
 };
 

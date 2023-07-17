@@ -5,18 +5,26 @@ export const uploadvideo = (videoData) => async (dispatch) => {
   try {
     const config={
         headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
              }
     }
-    const {data}=await axios.post('http://localhost:5000/api/auth/uploadvideo',videoData,config)
+    const data=await axios.post('http://localhost:5000/api/auth/uploadvideo',videoData,config)
     dispatch({
       type: "UPLOAD_VIDEO",
-      payload: data,
+      payload: data.data,
     });
-    
+    if(data.status === 200){
+      alert("video uploaded sucessfully")
+    }
+    console.log(data);
 
   } catch (err) {
-    console.log(err);
+    console.log(err,"hi");
+    if(err){
+      alert('File type not supported')
+    }
+    
+  
   }
 };
 

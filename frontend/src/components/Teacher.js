@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadvideo } from "../actions/videoactions";
+import { getVideo, uploadvideo } from "../actions/videoactions";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import TeacherVideos from "./TeacherVideos";
 
 const Teacher = () => {
   const dispatch = useDispatch();
+  let fileInputRef = useRef();
   const [teacher, setteacher] = useState();
   const [tutorial, setTutorial] = useState({
     title: "",
@@ -16,29 +16,26 @@ const Teacher = () => {
   const { video } = useSelector((state) => state.video);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(
-      uploadvideo({
-        title: tutorial.title,
-        description: tutorial.description,
-        url: tutorial.url,
-        teacher: teacher,
-      })
-      
-    );
-    if(video.success){
-      toast.success('Video Uploaded Successfully', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light"
-        });
+    
+    const fileInput = document.getElementById("Upload");
+    const file = fileInput.files[0];
+    if (!file) {
+      alert("No file selected.");
+      return;
     }
-
-   
+    const formData = new FormData();
+    formData.append('title',tutorial.title);
+    formData.append('description',tutorial.description);
+    formData.append('teacher',teacher);
+    formData.append('video', file);
+    dispatch(
+      uploadvideo(formData)
+    );
+    dispatch(getVideo())
+    setTutorial({ title: "",
+    description: "",
+    url: "",})
+    fileInputRef.current.value = null
   };
 
   const getuser = async () => {
@@ -63,20 +60,19 @@ const Teacher = () => {
       getuser();
       if (video?.success) {
         setTutorial({ title: "", description: "", url: "" });
-        
       }
     };
   }, [video]);
 
   return (
     <>
-      <div className="bg-teacher_bg text-white font-mono">
+      <div className="bg-teacher_bg text-white font-mono h-[100vh] pt-10">
         <form
-          className="flex flex-col items-center justify-center h-[100vh]"
+          className="flex flex-col items-center justify-center "
           onSubmit={handleSubmit}
         >
           <div className="mb-3">
-            <label for="title" className="text-xl">
+            <label htmlFor="title" className="text-xl">
               Title
             </label>
             <br />
@@ -89,7 +85,7 @@ const Teacher = () => {
             />
           </div>
           <div className="mb-3">
-            <label for="description" className="text-xl">
+            <label htmlFor="description" className="text-xl">
               Description
             </label>
             <br />
@@ -102,17 +98,11 @@ const Teacher = () => {
             />
           </div>
           <div className="mb-3">
-            <label for="url" className="text-xl">
-              Url
+            <label htmlFor="video" className="text-xl">
+              Upload Video
             </label>
             <br />
-            <input
-              type="text"
-              className="border-2 rounded hover:rounded-xl my-2 w-80 h-9 p-1 transition duration-[10000] text-black"
-              name="url"
-              value={tutorial.url}
-              onChange={onchange}
-            />
+            <input type="file" id="Upload" name="video" ref={fileInputRef}/>
           </div>
           <button
             type="submit"
@@ -120,22 +110,12 @@ const Teacher = () => {
           >
             Upload a video
           </button>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false} 
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
+          
         </form>
+        <div className="grid grid-cols-2"><TeacherVideos/></div>
       </div>
       
-   </> 
+    </>
   );
 };
 

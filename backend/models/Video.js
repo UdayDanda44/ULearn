@@ -10,7 +10,11 @@ const Video = new Schema({
     type:String,
     required:true
   },
-  url:{
+  url:{ 
+    type:String,
+    required:true
+  },
+  cloudinaryId: {
     type:String,
     required:true
   },

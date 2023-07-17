@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
-import Register from './Register'
 import Student from './Student'
 import Teacher from './Teacher'
 import {useSelector} from 'react-redux'

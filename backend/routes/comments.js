@@ -16,7 +16,7 @@ router.get('/getcomments',async(req,res)=>{
         const comments = await Comment.find().populate('user_id')
         return res.status(200).send(comments)
     } catch (error) {
-        return res.status(400).send(error)
+        return res.status(400).send({error,message:"Some error occured"})
     }
    }) 
 

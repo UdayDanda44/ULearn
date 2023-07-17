@@ -59,7 +59,7 @@ const Register = () => {
               <option value="teacher">Teacher</option>
               
             </select><br/>
-            <button type="submit" className="my-3 text-slate-50 bg-blue-700 rounded py-1 px-3 hover:shadow-lg hover:shadow-black">Submit</button>
+            <button type="submit" className="my-3 text-slate-50 bg-blue-700 rounded py-1 px-3 hover:shadow-lg hover:shadow-black content-center">Submit</button>
             </div>
         </form>
     </>
