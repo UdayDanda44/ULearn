@@ -50,7 +50,7 @@ const Student = () => {
   };
 
   if (!videos || videos.length === 0) {
-    return <div><h1>No videos</h1></div>;
+    return <div><h1 className="text-6xl text-center">No videos</h1></div>;
   }
   
   const videoElements = videos.map((video) => {

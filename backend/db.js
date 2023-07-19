@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const url = "mongodb://127.0.0.1";
+const url = "mongodb+srv://trithvikprince:pandu200477@cluster0.uqzttsa.mongodb.net/?retryWrites=true&w=majority";
 
 const connectToMongo = async()=>{
     await mongoose.connect(url);
