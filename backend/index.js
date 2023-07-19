@@ -11,11 +11,26 @@ var app = express()
  
 app.use(cors()) 
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://minip-seven.vercel.app/');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    next();
+app.all('/api/*', async (req, res) => {
+    try {
+      const url = `https://minip-seven.vercel.app${req.url}`;
+      const method = req.method.toLowerCase();
+      const headers = req.headers;
+      const data = req.body;
+  
+      const response = await axios({
+        method,
+        url,
+        headers,
+        data,
+      });
+  
+      // Forward the response from the target server to the client
+      res.status(response.status).json(response.data);
+    } catch (error) {
+      // Handle errors
+      res.status(error.response.status || 500).json({ error: error.message });
+    }
   });
  
 app.use(express.json()) 
