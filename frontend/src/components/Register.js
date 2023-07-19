@@ -25,7 +25,7 @@ const Register = () => {
         navigate("/login");
       }
       else{
-        alert("please enter correct credentials")
+        alert(json.error)
       }
     }
 
