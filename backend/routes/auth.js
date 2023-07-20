@@ -109,7 +109,13 @@ router.post(
         return res.status(500).json("internal server error")
     }
   })
-  
+  router.get('/getallusers',async(req,res)=>{
+    const users = await User.find({role:'student'});
+    const teachers = await User.find({role:'teacher'})
+    const noOfUsers = users.length
+    const noOfTeachers = teachers.length
+    return res.status(200).json({users:noOfUsers,teachers:noOfTeachers})
+  })
 
 
 module.exports = router;

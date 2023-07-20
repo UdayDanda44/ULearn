@@ -9,7 +9,7 @@ export const login = (data,navigate) => async (dispatch) => {
                 "Content-Type": "application/json",
              }
     }
-    await axios.post('https://minip-seven.vercel.app/api/auth/login',data,config).then((data1)=>{
+    await axios.post('http://localhost:5000/api/auth/login',data,config).then((data1)=>{
       dispatch({
         type: "LOGIN_USER",
         payload: data1.data,
@@ -30,7 +30,7 @@ export const login = (data,navigate) => async (dispatch) => {
 export const getUser = () => async(dispatch)=>{
   try {
     
-      await axios.get('https://minip-seven.vercel.app/api/auth/getuser').then((data1)=>{
+      await axios.get('http://localhost:5000/api/auth/getuser').then((data1)=>{
         dispatch({
           type: "GET_USER",
           payload: data1.data.user,

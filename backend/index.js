@@ -10,28 +10,6 @@ const fs = require('fs')
 var app = express()
  
 app.use(cors()) 
-
-app.all('/api/*', async (req, res) => {
-    try {
-      const url = `https://minip-seven.vercel.app${req.url}`;
-      const method = req.method.toLowerCase();
-      const headers = req.headers;
-      const data = req.body;
-  
-      const response = await axios({
-        method,
-        url,
-        headers,
-        data,
-      });
-  
-      // Forward the response from the target server to the client
-      res.status(response.status).json(response.data);
-    } catch (error) {
-      // Handle errors
-      res.status(error.response.status || 500).json({ error: error.message });
-    }
-  });
  
 app.use(express.json()) 
 

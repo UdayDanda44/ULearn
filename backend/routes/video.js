@@ -142,6 +142,10 @@ router.delete("/deletevideo/:id", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
-
+router.get('/getallvideos',async(req,res)=>{
+  const videos = await Video.find();
+  const videosLength = videos.length;
+  return res.status(200).json({noOfVideos:videosLength})
+})
 
 module.exports = router;

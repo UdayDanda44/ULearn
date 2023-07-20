@@ -17,7 +17,6 @@ const Navbar = () => {
       <ul>
         <Link className="li-items " to="#">Home </Link>
         <Link className="li-items" to="/about">About</Link>
-        <Link className="li-items" to="#">Courses</Link>
       </ul>
       <div>
         {currentUser.success?<button onClick = {handleLogout} type="button" className=" buttons">Logout</button>:<><Link to = '/login'><button type="button" className="buttons">Login</button></Link>
