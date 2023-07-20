@@ -29,7 +29,7 @@ const TeacherVideos = () => {
               title={video.title}
               width="640"
               height="360"
-              src={`${video.url}`}
+              src={`${video.url.replace('http://','https://')}`}
               allowFullScreen
             ></iframe>
             <AiFillDelete className="absolute right-10 top-6 cursor-pointer" onClick={()=>handleDelete(video._id)} style={{fontSize:"24px"}}></AiFillDelete>
