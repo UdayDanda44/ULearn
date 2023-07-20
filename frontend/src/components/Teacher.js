@@ -45,7 +45,7 @@ const Teacher = () => {
       },
     };
     const { data } = await axios.get(
-      "http://minip-seven.vercel.app/api/auth/getuser",
+      "https://minip-seven.vercel.app/api/auth/getuser",
       config
     );
     setteacher(data.username);
