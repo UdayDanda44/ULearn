@@ -5,11 +5,11 @@ const Mainpage = () => {
   const [details, setdetails] = useState()
   const [videos,setvideos] = useState()
   const getnofusers = async()=>{
-      const {data} = await axios.get('http://localhost:5000/api/auth/getallusers');
+      const {data} = await axios.get('https://minip-seven.vercel.app/api/auth/getallusers');
       setdetails(data)
   }
   const getVideos = async()=>{
-    const {data} = await axios.get('http://localhost:5000/api/auth/getallvideos')
+    const {data} = await axios.get('https://minip-seven.vercel.app/api/auth/getallvideos')
     setvideos(data)
   }
   useEffect(() => {

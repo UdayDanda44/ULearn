@@ -16,7 +16,7 @@ const TeacherVideos = () => {
     return video.teacher === currentUser.user.username;
   });
   const handleDelete = async(videoId)=>{
-   const {data} = await axios.delete(`http://localhost:5000/api/auth/deletevideo/${videoId}`)
+   const {data} = await axios.delete(`https://minip-seven.vercel.app/api/auth/deletevideo/${videoId}`)
     dispatch(getVideo())
     alert(data.message)
   }
