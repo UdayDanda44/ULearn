@@ -75,7 +75,7 @@ const Student = () => {
     
 
     const filteredComments = commentdata.filter((comment) => comment.video_id === video._id);
-    const urlid = video.url;
+    const urlid = video.url.replace('http://','https://');
     return (
       
       <div className="flex justify-center flex-row" key={video.url}>
