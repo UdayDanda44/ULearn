@@ -43,7 +43,7 @@ const LikedVideos = () => {
                     title={v.title}
                     width="640"
                     height="360"
-                    src={`${v.url}`}
+                    src={`${v.url.replace('http://','https://')}`}
                     class="w-full h-full"
                   ></iframe>
                   <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-transparent to-transparent py-2 px-4">
