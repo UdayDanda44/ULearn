@@ -9,7 +9,7 @@ const Register = () => {
     const onSubmit = async(e)=>{  
         console.log(credentials); 
         e.preventDefault() 
-        const response = await fetch("https://minip-seven.vercel.app/api/auth/createuser",{
+        const response = await fetch("http://minip-seven.vercel.app/api/auth/createuser",{
         method:'POST',
         headers:{
           'Content-Type':'application/json'

@@ -20,7 +20,7 @@ const Student = () => {
   };
 
   const getComments = async () => {
-    const { data } = await axios.get("https://minip-seven.vercel.app/api/auth/getcomments");
+    const { data } = await axios.get("http://minip-seven.vercel.app/api/auth/getcomments");
     setCommentdata(data);
   };
 
@@ -30,7 +30,7 @@ const Student = () => {
   }, []);
 
   const handleLike = async (videoId) => {
-    const response = await axios.post(`https://minip-seven.vercel.app/api/auth/likevideo/${videoId}`, {
+    const response = await axios.post(`http://minip-seven.vercel.app/api/auth/likevideo/${videoId}`, {
       user_id: currentUser.user._id,
     });
 
@@ -40,7 +40,7 @@ const Student = () => {
   };
 
   const handleUnlike = async (videoId) => {
-    const response = await axios.post(`https://minip-seven.vercel.app/api/auth/unlikevideo/${videoId}`, {
+    const response = await axios.post(`http://minip-seven.vercel.app/api/auth/unlikevideo/${videoId}`, {
       user_id: currentUser.user._id,
     });
     if (response.status === 200) {
@@ -69,7 +69,7 @@ const Student = () => {
         comment: input.comment,
         video_id: video._id,
       };
-      await axios.post("https://minip-seven.vercel.app/api/auth/uploadcomment", data);
+      await axios.post("http://minip-seven.vercel.app/api/auth/uploadcomment", data);
       alert("comment uploaded")
     };
     

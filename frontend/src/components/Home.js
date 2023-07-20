@@ -16,7 +16,7 @@ const Home = () => {
           'auth-token':currentUser.authtoken
       }
   }
-    const {data} = await axios('https://minip-seven.vercel.app/api/auth/getuser',config)
+    const {data} = await axios('http://minip-seven.vercel.app/api/auth/getuser',config)
     setuser(data);
     
   }
