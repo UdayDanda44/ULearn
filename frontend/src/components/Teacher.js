@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideo, uploadvideo } from "../actions/videoactions";
 import axios from "axios";
@@ -16,7 +16,7 @@ const Teacher = () => {
   const { video } = useSelector((state) => state.video);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const fileInput = document.getElementById("Upload");
     const file = fileInput.files[0];
     if (!file) {
@@ -24,18 +24,14 @@ const Teacher = () => {
       return;
     }
     const formData = new FormData();
-    formData.append('title',tutorial.title);
-    formData.append('description',tutorial.description);
-    formData.append('teacher',teacher);
-    formData.append('video', file);
-    dispatch(
-      uploadvideo(formData)
-    );
-    dispatch(getVideo())
-    setTutorial({ title: "",
-    description: "",
-    url: "",})
-    fileInputRef.current.value = null
+    formData.append("title", tutorial.title);
+    formData.append("description", tutorial.description);
+    formData.append("teacher", teacher);
+    formData.append("video", file);
+    dispatch(uploadvideo(formData));
+    dispatch(getVideo());
+    setTutorial({ title: "", description: "", url: "" });
+    fileInputRef.current.value = null;
   };
 
   const getuser = async () => {
@@ -45,7 +41,7 @@ const Teacher = () => {
       },
     };
     const { data } = await axios.get(
-      "https://minip-seven.vercel.app/api/auth/getuser",
+      "http://localhost:5000/api/auth/getuser",
       config
     );
     setteacher(data.username);
@@ -102,7 +98,7 @@ const Teacher = () => {
               Upload Video
             </label>
             <br />
-            <input type="file" id="Upload" name="video" ref={fileInputRef}/>
+            <input type="file" id="Upload" name="video" ref={fileInputRef} />
           </div>
           <button
             type="submit"
@@ -110,11 +106,11 @@ const Teacher = () => {
           >
             Upload a video
           </button>
-          
         </form>
-        <div className="grid grid-cols-2"><TeacherVideos/></div>
+        <div className="grid grid-cols-2">
+          <TeacherVideos />
+        </div>
       </div>
-      
     </>
   );
 };

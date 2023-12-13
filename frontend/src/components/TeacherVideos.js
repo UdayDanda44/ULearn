@@ -15,11 +15,13 @@ const TeacherVideos = () => {
   const filteredVideos = videos?.filter((video) => {
     return video.teacher === currentUser.user.username;
   });
-  const handleDelete = async(videoId)=>{
-   const {data} = await axios.delete(`https://minip-seven.vercel.app/api/auth/deletevideo/${videoId}`)
-    dispatch(getVideo())
-    alert(data.message)
-  }
+  const handleDelete = async (videoId) => {
+    const { data } = await axios.delete(
+      `http://localhost:5000/api/auth/deletevideo/${videoId}`
+    );
+    dispatch(getVideo());
+    alert(data.message);
+  };
   return (
     <>
       {filteredVideos?.map((video) => {
@@ -29,10 +31,14 @@ const TeacherVideos = () => {
               title={video.title}
               width="640"
               height="360"
-              src={`${video.url.replace('http://','https://')}`}
+              src={`${video.url.replace("http://", "https://")}`}
               allowFullScreen
             ></iframe>
-            <AiFillDelete className="absolute right-10 top-6 cursor-pointer" onClick={()=>handleDelete(video._id)} style={{fontSize:"24px"}}></AiFillDelete>
+            <AiFillDelete
+              className="absolute right-10 top-6 cursor-pointer"
+              onClick={() => handleDelete(video._id)}
+              style={{ fontSize: "24px" }}
+            ></AiFillDelete>
           </div>
         );
       })}

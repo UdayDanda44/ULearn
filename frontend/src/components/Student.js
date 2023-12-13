@@ -4,7 +4,7 @@ import { getVideo } from "../actions/videoactions";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Student = () => { 
+const Student = () => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
   const [input, setInput] = useState({ comment: "" });
@@ -20,7 +20,9 @@ const Student = () => {
   };
 
   const getComments = async () => {
-    const { data } = await axios.get("https://minip-seven.vercel.app/api/auth/getcomments");
+    const { data } = await axios.get(
+      "http://localhost:5000/api/auth/getcomments"
+    );
     setCommentdata(data);
   };
 
@@ -30,58 +32,72 @@ const Student = () => {
   }, []);
 
   const handleLike = async (videoId) => {
-    const response = await axios.post(`https://minip-seven.vercel.app/api/auth/likevideo/${videoId}`, {
-      user_id: currentUser.user._id,
-    });
+    const response = await axios.post(
+      `http://localhost:5000/api/auth/likevideo/${videoId}`,
+      {
+        user_id: currentUser.user._id,
+      }
+    );
 
     if (response.status === 200) {
-      dispatch(getVideo())
+      dispatch(getVideo());
     }
   };
 
   const handleUnlike = async (videoId) => {
-    const response = await axios.post(`https://minip-seven.vercel.app/api/auth/unlikevideo/${videoId}`, {
-      user_id: currentUser.user._id,
-    });
+    const response = await axios.post(
+      `http://localhost:5000/api/auth/unlikevideo/${videoId}`,
+      {
+        user_id: currentUser.user._id,
+      }
+    );
     if (response.status === 200) {
-      dispatch(getVideo())
+      dispatch(getVideo());
     }
-
   };
 
   if (!videos || videos.length === 0) {
-    return <div><h1 className="text-6xl text-center">No videos</h1></div>;
+    return (
+      <div>
+        <h1 className="text-6xl text-center">No videos</h1>
+      </div>
+    );
   }
-  
+
   const videoElements = videos.map((video) => {
     const onSubmit = async (e) => {
       e.preventDefault();
       await uploadComment();
       setInput({ comment: "" });
-      getComments(); 
+      getComments();
     };
     console.log(video?.likes.includes(currentUser._id));
     console.log(currentUser);
-    
+
     const uploadComment = async () => {
       const data = {
         user_id: currentUser.user._id,
         comment: input.comment,
         video_id: video._id,
       };
-      await axios.post("https://minip-seven.vercel.app/api/auth/uploadcomment", data);
-      alert("comment uploaded")
+      await axios.post("http://localhost:5000/api/auth/uploadcomment", data);
+      alert("comment uploaded");
     };
-    
 
-    const filteredComments = commentdata.filter((comment) => comment.video_id === video._id);
-    const urlid = video.url.replace('http://','https://');
+    const filteredComments = commentdata.filter(
+      (comment) => comment.video_id === video._id
+    );
+    const urlid = video.url.replace("http://", "https://");
     return (
-      
       <div className="flex justify-center flex-row" key={video.url}>
-        
         <div className="my-5 border-2 p-4 rounded hover:rounded-xl">
-          <iframe width="640" height="360" src={`${urlid}`} title={video.title} allowFullScreen></iframe>
+          <iframe
+            width="640"
+            height="360"
+            src={`${urlid}`}
+            title={video.title}
+            allowFullScreen
+          ></iframe>
           <div className="card-body">
             <h5 className="text-xl mb-1">{video.title}</h5>
             <p className="mb-3">{video.description}</p>
@@ -90,8 +106,16 @@ const Student = () => {
             </button>
             <form onSubmit={onSubmit} className="my-2">
               <label>Comment</label>
-              <input type="text" name="comment" onChange={onChange} className="border mx-1" />
-              <button type="submit" className="bg-blue-600 text-white border rounded-lg px-3">
+              <input
+                type="text"
+                name="comment"
+                onChange={onChange}
+                className="border mx-1"
+              />
+              <button
+                type="submit"
+                className="bg-blue-600 text-white border rounded-lg px-3"
+              >
                 Submit
               </button>
             </form>
@@ -125,7 +149,16 @@ const Student = () => {
     );
   });
 
-  return <><Link to = '/likedvideos' className="flex justify-center"><button className="bg-blue-600 rounded-lg p-1 my-2 mx-1 text-slate-200">LikedVideos</button></Link><div className="grid grid-cols-2">{videoElements}</div></>;
+  return (
+    <>
+      <Link to="/likedvideos" className="flex justify-center">
+        <button className="bg-blue-600 rounded-lg p-1 my-2 mx-1 text-slate-200">
+          LikedVideos
+        </button>
+      </Link>
+      <div className="grid grid-cols-2">{videoElements}</div>
+    </>
+  );
 };
 
 export default Student;

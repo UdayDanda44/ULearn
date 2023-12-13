@@ -4,7 +4,7 @@ const fetchUser = (req,res,next)=>{
     const token = req.header('auth-token');
     
     if(!token){
-        return res.status(401).json({error:"please use a vaild token"})
+        return res.status(401).json({error:"please use a valid token"})
     }
     try {
         const string = jwt.verify(token,JWT_SECRET);
